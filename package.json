@@ -1,0 +1,19 @@
+{
+    "name": "reddit",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "dev": "tsc && node dist/index.js"
+    },
+    "type": "module",
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "typescript": "^4.9.4"
+    },
+    "dependencies": {
+        "puppeteer": "^19.5.2"
+    }
+}
