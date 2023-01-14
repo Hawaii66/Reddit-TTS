@@ -1,10 +1,11 @@
-import { go } from "./src/Puppeteer.js";
+import { openAnswer } from "./src/Puppeteer.js";
 import { getPost } from "./src/Reddit.js";
+import { getMultipleImages } from "./src/Utilts.js";
 
 const main = async () => {
   const post = await getPost();
 
-  go(post);
+  await getMultipleImages(post.comments);
 };
 
 main();

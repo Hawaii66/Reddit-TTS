@@ -1,0 +1,154 @@
+:root {
+    margin: 0px;
+    padding: 0px;
+    --main-text: #d7dadc;
+    --main-bg: #1a1a1b;
+    --main-action: #818384;
+    --main-red: #ff4500;
+    --main-line: #343536;
+}
+
+body {
+    background-color: var(--main-bg);
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: "myfont";
+    src: url("font.woff") format("woff");
+}
+
+@font-face {
+    font-family: "text";
+    src: url("font2.woff2") format(".woff2");
+}
+
+@font-face {
+    font-family: "much";
+    src: url("https://www.redditstatic.com/desktop2x/fonts/NotoSans/Regular-d6a6aa8dc0f93416a832ea04a18c6fb8-font.woff2") format(".woff2");
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    height: 28px;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "text";
+    color: var(--main-text);
+    margin-left: 4px;
+}
+
+.header span {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "text";
+    color: var(--main-action);
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.header h2 {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: "text";
+    color: var(--main-action);
+}
+
+.header img {
+    height: 28px;
+    width: 28px;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.bottom .line {
+    margin-top: 2px;
+    margin-left: 12px;
+    width: 2px;
+    min-height: 100%;
+    background-color: var(--main-line);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.main p {
+    margin-left: 12px;
+    margin-right: 12px;
+    color: var(--main-text);
+    font-family: "much";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 21px;
+    letter-spacing: 0.5px;
+}
+
+.main .actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.arrow::before {
+    font-family: "myfont";
+    font-size: 20px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.up::before {
+    content: "\f34d";
+    color: var(--main-red);
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.down::before {
+    content: "\f197";
+    color: var(--main-action);
+}
+
+.icon::before {
+    font-family: "myfont";
+    font-size: 20px;
+    color: var(--main-action);
+}
+
+.reply::before {
+    content: "\f16f";
+}
+
+.main .actions .upvotes {
+    color: var(--main-red);
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.main h3 {
+    font-size: 12px;
+    color: var(--main-action);
+    font-weight: 900;
+    margin-left: 8px;
+    letter-spacing: 1px;
+}
+
+.main h3 .replytext {
+    margin-left: 4px;
+}
