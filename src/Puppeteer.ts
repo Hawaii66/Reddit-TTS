@@ -58,7 +58,7 @@ export const openAnswer = async (page: Page, comment: IRedditPost) => {
   );
 
   await page.screenshot({
-    path: `Comments/comment-${comment.author}-${comment.upvotes}.png`,
+    path: `RedditImages/Comments/comment-${comment.author}-${comment.upvotes}.png`,
     clip: {
       x: 0,
       y: 0,
@@ -103,7 +103,7 @@ export const openQuestion = async (post: IRedditPost) => {
 
   await page.setContent(content);
 
-  await page.screenshot({ path: "example1.png", fullPage: true });
+  await page.screenshot({ path: "RedditImages/question.png", fullPage: true });
 
   await browser.close();
 };

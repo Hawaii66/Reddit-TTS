@@ -1,5 +1,8 @@
 import { IRedditPost } from "./Interface";
-import { openAnswer, startBrowser } from "./Puppeteer.js";
+import path from "path";
+import { openAnswer, openQuestion, startBrowser } from "./Puppeteer.js";
+import { getPost } from "./Reddit.js";
+import fs from "fs";
 
 export const formatUpvotes = (upvotes: number): string => {
   if (upvotes < 1000) {
@@ -24,4 +27,29 @@ export const getMultipleImages = async (comments: IRedditPost[]) => {
   }
 
   browser.close();
+};
+
+export const getAskRedditImage = async () => {
+  const post = await getPost();
+
+  removeImages("RedditImages");
+  removeImages("RedditImages/Comments");
+
+  await openQuestion(post);
+  await getMultipleImages(post.comments);
+};
+
+export const removeImages = (dir: string) => {
+  const __dirname = path.resolve(path.dirname("."));
+  fs.readdir(`${__dirname}/${dir}`, (err, files) => {
+    if (err) throw err;
+
+    for (const file of files) {
+      if (path.extname(file) === ".png") {
+        fs.unlink(path.join(`${__dirname}/${dir}`, file), (err) => {
+          if (err) throw err;
+        });
+      }
+    }
+  });
 };
