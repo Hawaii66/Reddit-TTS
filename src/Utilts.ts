@@ -37,6 +37,8 @@ export const getAskRedditImage = async () => {
 
   await openQuestion(post);
   await getMultipleImages(post.comments);
+
+  return post;
 };
 
 export const removeImages = (dir: string) => {
