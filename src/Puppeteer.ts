@@ -2,7 +2,7 @@ import puppeteer, { Page } from "puppeteer";
 import path from "path";
 import fs from "fs";
 import { IRedditPost } from "./Interface";
-import { formatUpvotes } from "./Utilts.js";
+import { formatUpvotes, getRandomUserIcon } from "./Utilts.js";
 
 export const startBrowser = async () => {
   const browser = await puppeteer.launch();
@@ -23,7 +23,11 @@ export const openAnswer = async (page: Page, comment: IRedditPost) => {
     `https://www.reddit.com/user/${comment.author}/about.json`
   );
   const data = await json.json();
-  const icon = data.data.snoovatar_img;
+  var icon = data.data.snoovatar_img;
+
+  if (icon === "") {
+    icon = getRandomUserIcon();
+  }
 
   content = content.replace("(AUTHOR)", comment.author);
   content = content.replace("(TEXT)", comment.text);

@@ -11,6 +11,11 @@ export const formatUpvotes = (upvotes: number): string => {
   return `${rounded}k`;
 };
 
+export const getRandomUserIcon = () => {
+  const number = Math.floor(Math.random() * 8);
+  return `https://www.redditstatic.com/avatars/defaults/v2/avatar_default_${number}.png`;
+};
+
 export const getMultipleImages = async (comments: IRedditPost[]) => {
   const { page, browser } = await startBrowser();
 
