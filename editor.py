@@ -15,7 +15,11 @@ def merge_comment(comment_name:str):
 files = os.listdir(os.curdir + "/RedditImages/Comments")
 files = list(filter(lambda x: (x.endswith(".png")),files))
 
-clips = []
+question_audio = AudioFileClip("./RedditImages/Voice.mp3")
+question_image = ImageClip("./RedditImages/Question.png").resize(0.2).set_audio(question_audio).set_duration(question_audio.duration)
+
+clips = [question_image]
+
 for file in files:
 	clips.append(merge_comment(file))
 
@@ -28,6 +32,7 @@ merged_clips = merged_clips.set_pos("center")
 #t = t.set_audio(a)
 #t = t.set_duration(a.duration)
 #t = t.set_pos("center")
+
 
 clip = VideoFileClip("Video.mp4").subclip(0,merged_clips.duration)
 clip = clip.volumex(0)

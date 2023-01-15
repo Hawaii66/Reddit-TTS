@@ -1,8 +1,8 @@
 import { IRedditPost } from "./Interface";
 import * as path from "path";
 import * as fs from "fs";
-import { openAnswer, openQuestion, startBrowser } from "./Puppeteer.js";
-import { getPost } from "./Reddit.js";
+import { openAnswer, openQuestion, startBrowser } from "./Puppeteer";
+import { getPost } from "./Reddit";
 
 export const formatUpvotes = (upvotes: number): string => {
   if (upvotes < 1000) {
@@ -34,6 +34,8 @@ export const getAskRedditImage = async () => {
 
   removeImages("RedditImages");
   removeImages("RedditImages/Comments");
+  removeVoices("RedditImages");
+  removeVoices("RedditImages/Comments");
 
   await openQuestion(post);
   await getMultipleImages(post.comments);
@@ -42,12 +44,20 @@ export const getAskRedditImage = async () => {
 };
 
 export const removeImages = (dir: string) => {
+  removeWithExtension(dir, ".png");
+};
+
+export const removeVoices = (dir: string) => {
+  removeWithExtension(dir, ".mp3");
+};
+
+export const removeWithExtension = (dir: string, ext: string) => {
   const __dirname = path.resolve(path.dirname("."));
   fs.readdir(`${__dirname}/${dir}`, (err, files) => {
     if (err) throw err;
 
     for (const file of files) {
-      if (path.extname(file) === ".png") {
+      if (path.extname(file) === ext) {
         fs.unlink(path.join(`${__dirname}/${dir}`, file), (err) => {
           if (err) throw err;
         });

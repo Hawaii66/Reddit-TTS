@@ -4,10 +4,7 @@ import { getAskRedditImage } from "./src/Utilts";
 const main = async () => {
   const askReddit = await getAskRedditImage();
 
-  generateText(
-    askReddit.text,
-    `Voice-${askReddit.author}-${askReddit.upvotes}`
-  );
+  generateText(askReddit.text, `/Voice`);
 
   for (var i = 0; i < askReddit.comments.length; i++) {
     generateText(
