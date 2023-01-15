@@ -4,9 +4,9 @@
     "description": "",
     "main": "main.js",
     "scripts": {
-        "dev": "tsc && node dist/index.js"
+        "dev": "nodemon --exec ts-node index.ts",
+        "build": "tsc && node dist/index.js"
     },
-    "type": "module",
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -17,6 +17,8 @@
         "@types/aws-sdk": "^2.7.0",
         "aws-sdk": "^2.1295.0",
         "dotenv": "^16.0.3",
-        "puppeteer": "^19.5.2"
+        "nodemon": "^2.0.20",
+        "puppeteer": "^19.5.2",
+        "ts-node": "^10.9.1"
     }
 }

@@ -1,7 +1,7 @@
-import { openAnswer } from "./src/Puppeteer.js";
-import { getPost } from "./src/Reddit.js";
-import { getAskRedditImage, getMultipleImages } from "./src/Utilts.js";
-import { generateText } from "./src/Polly.js";
+import { openAnswer } from "./src/Puppeteer";
+import { getPost } from "./src/Reddit";
+import { getAskRedditImage, getMultipleImages } from "./src/Utilts";
+import { generateText } from "./src/Polly";
 
 const main = async () => {
   const askReddit = await getAskRedditImage();
