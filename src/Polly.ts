@@ -1,10 +1,9 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-
-import AWS from "aws-sdk/global.js";
-import Polly from "aws-sdk/clients/polly.js";
-import fs from "fs";
-import path from "path";
+import * as path from "path";
+import * as fs from "fs";
+import * as AWS from "aws-sdk/global";
+import * as Polly from "aws-sdk/clients/polly";
 
 export const getPolly = () => {
   const creds = new AWS.Credentials({

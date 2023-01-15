@@ -1,6 +1,6 @@
-from moviepy.editor import *
-from glob import glob
 import os
+from moviepy.editor import *
+
 
 def merge_comment(comment_name:str):
 	audio_name = comment_name[8:len(comment_name)]

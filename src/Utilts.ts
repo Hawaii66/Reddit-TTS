@@ -1,8 +1,8 @@
 import { IRedditPost } from "./Interface";
-import path from "path";
+import * as path from "path";
+import * as fs from "fs";
 import { openAnswer, openQuestion, startBrowser } from "./Puppeteer.js";
 import { getPost } from "./Reddit.js";
-import fs from "fs";
 
 export const formatUpvotes = (upvotes: number): string => {
   if (upvotes < 1000) {

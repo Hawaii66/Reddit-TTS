@@ -19,6 +19,14 @@ export const getPost = async (): Promise<IRedditPost> => {
   return posts[0];
 };
 
+interface IRedditCommentReal {
+  data: {
+    body: string;
+    author: string;
+    score: number;
+  };
+}
+
 export const getComments = async (
   link: string,
   max = 10
@@ -26,7 +34,7 @@ export const getComments = async (
   const api = `https://www.reddit.com${link}.json`;
   const result = await fetch(api);
   const json = await result.json();
-  const data = json[1].data.children;
+  const data: IRedditCommentReal[] = json[1].data.children;
 
   const comments: IRedditPost[] = data
     .map((comment) => {

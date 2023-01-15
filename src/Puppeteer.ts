@@ -1,8 +1,8 @@
 import puppeteer, { Page } from "puppeteer";
-import path from "path";
-import fs from "fs";
+import * as path from "path";
+import * as fs from "fs";
 import { IRedditPost } from "./Interface";
-import { formatUpvotes, getRandomUserIcon } from "./Utilts.js";
+import { formatUpvotes, getRandomUserIcon } from "./Utilts";
 
 export const startBrowser = async () => {
   const browser = await puppeteer.launch();
@@ -48,14 +48,12 @@ export const openAnswer = async (page: Page, comment: IRedditPost) => {
   await page.setContent(content);
 
   const headerElem = await page.$(".header");
-  const headerHeight = await headerElem.evaluate(
-    (e) => e.getBoundingClientRect().height
-  );
+  const headerHeight =
+    (await headerElem?.evaluate((e) => e.getBoundingClientRect().height)) || 0;
 
   const bodyElem = await page.$(".main");
-  const bodyHeight = await bodyElem.evaluate(
-    (e) => e.getBoundingClientRect().height
-  );
+  const bodyHeight =
+    (await bodyElem?.evaluate((e) => e.getBoundingClientRect().height)) || 0;
 
   await page.screenshot({
     path: `RedditImages/Comments/comment-${comment.author}-${comment.upvotes}.png`,
@@ -103,7 +101,10 @@ export const openQuestion = async (post: IRedditPost) => {
 
   await page.setContent(content);
 
-  await page.screenshot({ path: "RedditImages/question.png", fullPage: true });
+  await page.screenshot({
+    path: `RedditImages/comment-${post.author}-${post.upvotes}.png`,
+    fullPage: true,
+  });
 
   await browser.close();
 };
