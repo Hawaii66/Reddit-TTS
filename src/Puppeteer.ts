@@ -82,7 +82,7 @@ export const openQuestion = async (post: IRedditPost) => {
   });
 
   const __dirname = path.resolve(path.dirname("."));
-  var content = fs.readFileSync(`${__dirname}/test.html`, "utf-8");
+  var content = fs.readFileSync(`${__dirname}/question.html`, "utf-8");
 
   const upvotesFormated = formatUpvotes(post.upvotes);
 
@@ -92,7 +92,7 @@ export const openQuestion = async (post: IRedditPost) => {
   content = content.replace("(TEXT)", post.text);
 
   //Load css from other file
-  const css = fs.readFileSync(`${__dirname}/styles.css`, "utf-8");
+  const css = fs.readFileSync(`${__dirname}/stylesquestion.css`, "utf-8");
   content = content.replace("(STYLE)", css);
 
   //Change local fonts to redit fonts
