@@ -20,8 +20,14 @@ question_image = ImageClip("./RedditImages/Question.png").resize(0.2).set_audio(
 
 clips = [question_image]
 
+max_duration = 50
+duration = question_image.duration
 for file in files:
-	clips.append(merge_comment(file))
+	video = merge_comment(file)
+	duration += video.duration
+	if duration > max_duration:
+		break
+	clips.append(video)
 
 merged_clips = concatenate_videoclips(clips)
 merged_clips = merged_clips.set_pos("center")

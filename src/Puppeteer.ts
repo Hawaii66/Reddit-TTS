@@ -23,9 +23,14 @@ export const openAnswer = async (page: Page, comment: IRedditPost) => {
     `https://www.reddit.com/user/${comment.author}/about.json`
   );
   const data = await json.json();
-  var icon = data.data.snoovatar_img;
+  var icon =
+    data === undefined
+      ? ""
+      : data.data === undefined
+      ? ""
+      : data.data.snoovatar_img;
 
-  if (icon === "") {
+  if (icon === "" || data.data.snoovatar_img === undefined) {
     icon = getRandomUserIcon();
   }
 
@@ -73,6 +78,7 @@ export const openQuestion = async (post: IRedditPost) => {
   await page.setViewport({
     width: 500,
     height: 200,
+    deviceScaleFactor: 10,
   });
 
   const __dirname = path.resolve(path.dirname("."));
