@@ -41,15 +41,6 @@ export const openAnswer = async (page: Page, comment: IRedditPost) => {
   const css = fs.readFileSync(`${__dirname}/stylescomment.css`, "utf-8");
   content = content.replace("(STYLE)", css);
 
-  //Change local fonts to redit fonts
-  content = content.replace(
-    '"font.woff"',
-    `"https://www.redditstatic.com/desktop2x/fonts/redesignIcon2020/redesignFont2020.971ac4e47ee7863c9338c58b059a0c86.woff"`
-  );
-  content = content.replace(
-    '"font2.woff2"',
-    `"https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Bold-875de5047556e7c822519d95d7ee692d-font.woff2"`
-  );
   await page.setContent(content);
 
   const headerElem = await page.$(".header");

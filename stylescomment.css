@@ -15,12 +15,12 @@ body {
 
 @font-face {
     font-family: "myfont";
-    src: url("font.woff") format("woff");
+    src: url("https://www.redditstatic.com/desktop2x/fonts/redesignIcon2020/redesignFont2020.971ac4e47ee7863c9338c58b059a0c86.woff") format("woff");
 }
 
 @font-face {
     font-family: "text";
-    src: url("font2.woff2") format(".woff2");
+    src: url("https://www.redditstatic.com/desktop2x/fonts/IBMPlexSans/Bold-875de5047556e7c822519d95d7ee692d-font.woff2") format(".woff2");
 }
 
 @font-face {
