@@ -29,18 +29,18 @@ export const generateText = async (text: string, directory: string) => {
     VoiceId: "Matthew",
   };
 
-  polly.synthesizeSpeech(params, (err, data) => {
+  const result = polly.synthesizeSpeech(params, (err, data) => {
     if (err) {
       console.log("Polly error", err);
       return;
     }
     const __dirname = path.resolve(path.dirname("."));
-    fs.writeFile(
+    const result = fs.writeFileSync(
       `${__dirname}/RedditImages${directory}.mp3`,
-      data.AudioStream as string,
-      (e) => {
-        console.log("File writing error", e);
-      }
+      data.AudioStream as string
     );
+    console.log(result);
   });
+
+  await result.promise();
 };

@@ -1,3 +1,9 @@
-npm run dev
+echo "Starting Reddit TTS"
 
-python editor.py
+exec npm run start
+
+echo "Done fetching and generating responses"
+
+echo "Starting video generation"
+
+exec python editor.py
