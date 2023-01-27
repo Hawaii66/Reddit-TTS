@@ -1,15 +1,14 @@
 import { generateText } from "./src/Polly";
 import { getAskRedditImage } from "./src/Utilts";
+import { spawn } from "child_process";
 
 const main = async () => {
-  console.log("Starting reddit fetch");
   const askReddit = await getAskRedditImage();
-  console.log("Generating question voice");
+
   await generateText(askReddit.text, `/Voice`);
-  console.log("Generating question voices");
+
   var promises: Promise<any>[] = [];
   for (var i = 0; i < askReddit.comments.length; i++) {
-    console.log("Generating voice", askReddit.comments[i].author);
     promises.push(
       generateText(
         askReddit.comments[i].text,
@@ -19,7 +18,16 @@ const main = async () => {
   }
 
   await Promise.all(promises);
-  console.log("Done generating responses");
+
+  const python = spawn("python", ["editor.py"]);
+
+  python.on("close", () => {
+    console.log("Python script done");
+  });
+
+  python.stdout.on("data",(t)=>{
+	console.log(t);
+  })
 };
 
 main();

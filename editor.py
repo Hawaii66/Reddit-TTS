@@ -1,6 +1,7 @@
 import os
 
 from moviepy.editor import *
+from moviepy.video.fx.all import crop
 
 
 def merge_comment(comment_name:str):
@@ -20,29 +21,44 @@ question_image = ImageClip("./RedditImages/Question.png").resize(0.2).set_audio(
 
 clips = [question_image]
 
-max_duration = 50
+max_duration_total = 50
+max_duration_per_clip = 20
 duration = question_image.duration
 for file in files:
 	video = merge_comment(file)
+	if video.duration > max_duration_per_clip:
+		continue
+	
 	duration += video.duration
-	if duration > max_duration:
+	if duration > max_duration_total:
 		break
+	
 	clips.append(video)
+
+	break
 
 merged_clips = concatenate_videoclips(clips)
 merged_clips = merged_clips.set_pos("center")
-
-#a = AudioFileClip("./RedditImages/Comments/Voice-akumajfr-15327.mp3")
-#t = ImageClip("./RedditImages/Comments/comment-akumajfr-15327.png")
-#t = t.resize(0.2)
-#t = t.set_audio(a)
-#t = t.set_duration(a.duration)
-#t = t.set_pos("center")
-
-
 clip = VideoFileClip("Video.mp4").subclip(0,merged_clips.duration)
-clip = clip.volumex(0)
 
-video = CompositeVideoClip([clip,merged_clips],size=(1920,1080))
+def create_tiktok(clip,merged_clips):
+	clip = crop(clip,x1=(1920/2)-(1080/2),y1=0,x2=(1920/2)+(1080/2),y2=1080)
+	clip = clip.resize(16/9)
+	clip = clip.volumex(0).set_pos("center")
 
-video.write_videofile("export.mp4")
+	video = CompositeVideoClip([clip,merged_clips],size=(1080,1920))
+
+	return video
+
+def create_youtube(clip,merged_clips):
+	clip = clip.volumex(0)
+
+	video = CompositeVideoClip([clip,merged_clips],size=(1920,1080))
+
+	return video
+
+tiktok = create_tiktok(clip,merged_clips)
+tiktok.write_videofile("tiktok.mp4")
+
+youtube = create_youtube(clip,merged_clips)
+youtube.write_videofile("youtube.mp4")
